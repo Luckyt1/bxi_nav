@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/bxi/the_automatic_navigation_system_based_on_fast_livo2_and_cmu_automatic/autonomous_exploration_development_environment/install/visualization_tools/local/lib/python3.10/dist-packages",
+        "/home/bxi/point_lio_ws/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/bxi/the_automatic_navigation_system_based_on_fast_livo2_and_cmu_automatic/autonomous_exploration_development_environment/install/visualization_tools/local/lib/python3.10/dist-packages",
+        "/home/bxi/point_lio_ws/install/livox_ros_driver2/local/lib/python3.10/dist-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}
