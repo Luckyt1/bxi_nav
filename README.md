@@ -13,7 +13,6 @@ sudo make install
 ```
 cd src/livox_ros_driver2/
 bash build.sh humble
-# 需要编译sdk 并install 它
 ```
 ### 3. 启动
 ```
