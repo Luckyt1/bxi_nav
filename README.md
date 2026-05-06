@@ -80,7 +80,7 @@ bxi_nav/src/livox_ros_driver2/config/MID360s_config.json
 #修改后重新编译即可
 ```
 **如果不好查看雷达ip，可以先配置好静态ip然后运行该程序，在终端可以看到具体ip**
-### 如何配置静态ip
+#### 如何配置静态ip
 ![alt text](/img/image-4.png)
 点击设置的齿轮，如图配置即可，建议直连配置，远程桌面配置可能有权限的问题<br>
 ![alt text](/img/image-5.png)
