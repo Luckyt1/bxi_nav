@@ -34,7 +34,7 @@ bash stop.sh
 ### 1.坐标系问题
 本项目的雷达硬件是倒置的,如果后续雷达是正向放置，需要自行更改坐标系<br>
 ### 2.雷达无法启动
-应该是没有好雷达驱动<br>
+应该是没有配置好雷达驱动<br>
 #### 配置修改
 bxi_nav/src/livox_ros_driver2/config/MID360s_config.json
 ```
