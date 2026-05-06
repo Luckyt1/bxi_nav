@@ -697,27 +697,6 @@ livox_status CommandImpl::StopForcedHeating(uint32_t handle, LivoxLidarAsyncCont
   return SendSingleControlCommand(handle, cb, client_data, kKeyForceHeatEn, 0x00/*disable forced heating*/);
 }
 
-livox_status CommandImpl::SetLivoxLidarPpsSyncMode(uint32_t handle, LivoxLidarPpsSyncMode pps_sync_mode, LivoxLidarAsyncControlCallback cb, void* client_data) {
-  uint8_t req_buff[kMaxCommandBufferSize] = {0};
-  uint16_t req_len = 0;
-  
-  uint16_t key_num = 1;
-  memcpy(&req_buff[req_len], &key_num, sizeof(key_num));
-  req_len = sizeof(key_num) + sizeof(uint16_t);
-
-  LivoxLidarKeyValueParam * kv = (LivoxLidarKeyValueParam *)&req_buff[req_len];
-  kv->key = static_cast<uint16_t>(kKeySetPpsSyncMode);
-  kv->length = sizeof(uint8_t);
-  uint8_t* val_pps_sync_mode = reinterpret_cast<uint8_t*>(&kv->value[0]);
-  *val_pps_sync_mode = pps_sync_mode;
-  req_len += sizeof(LivoxLidarKeyValueParam) - 1 + sizeof(uint8_t);
-
-  return GeneralCommandHandler::GetInstance().SendCommand(handle,
-                    kCommandIDLidarWorkModeControl,
-                    req_buff,
-                    req_len,
-                    MakeCommandCallback<LivoxLidarAsyncControlResponse>(cb, client_data));
-}
 livox_status CommandImpl::SetLivoxLidarEscMode(uint32_t handle, LivoxLidarEscMode esc_mode, LivoxLidarAsyncControlCallback cb, void* client_data) {
   uint8_t req_buff[kMaxCommandBufferSize] = {0};
   uint16_t req_len = 0;

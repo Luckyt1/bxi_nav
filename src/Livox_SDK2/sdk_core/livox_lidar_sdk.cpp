@@ -276,10 +276,6 @@ livox_status StopForcedHeating(uint32_t handle, LivoxLidarAsyncControlCallback c
   return CommandImpl::StopForcedHeating(handle, cb, client_data);
 }
 
-livox_status SetLivoxLidarPpsSyncMode(uint32_t handle, LivoxLidarPpsSyncMode pps_sync_mode, LivoxLidarAsyncControlCallback cb, void* client_data) {
-  return CommandImpl::SetLivoxLidarPpsSyncMode(handle, pps_sync_mode, cb, client_data);
-}
-
 livox_status SetLivoxLidarEscMode(uint32_t handle, LivoxLidarEscMode esc_mode, LivoxLidarAsyncControlCallback cb, void* client_data) {
   return CommandImpl::SetLivoxLidarEscMode(handle, esc_mode, cb, client_data);
 }

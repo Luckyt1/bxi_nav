@@ -33,7 +33,7 @@
 
 #define LIVOX_LIDAR_SDK_MAJOR_VERSION       1
 #define LIVOX_LIDAR_SDK_MINOR_VERSION       3
-#define LIVOX_LIDAR_SDK_PATCH_VERSION       1
+#define LIVOX_LIDAR_SDK_PATCH_VERSION       0
 
 #define kBroadcastCodeSize 16
 
@@ -98,7 +98,6 @@ typedef enum {
   kKeyFusaEn                  = 0x001D,
   kKeyForceHeatEn             = 0x001E,
   kKeySetEscMode              = 0x0021,
-  kKeySetPpsSyncMode          = 0x0026,
 
   kKeyLogParamSet             = 0x7FFF,
 
@@ -259,10 +258,6 @@ typedef enum {
   kLivoxLidarUpgrade = 0x08
 } LivoxLidarWorkMode;
 
-typedef enum {
-  kLivoxPpsSyncNormal = 0x00,
-  kLivoxPpsSyncSpec = 0x01,
-} LivoxLidarPpsSyncMode;
 typedef enum {
   kLivoxEscSpeedNormal = 0x00,
   kLivoxEscSpeedSlow = 0x01,
