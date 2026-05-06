@@ -24,7 +24,7 @@ bash start.sh
 随后多的一个终端里面启动雷达驱动节点即可 确保发布这两个节点/**livox/imu** **/livox/lidar**<br>
 ![alt text](img/image-3.png)
 ![alt text](img/image-2.png)
-可以往 **/way_point** 话题里发期望机器人移动的位置<br>
+可以往 **/way_point** 话题里发期望机器人移动的位置，或者用RVIZ里面的Waypoint在可视化界面里点想要去的位置<br>
 **/cmd_vel**是导航发布的移动指令，需要自行转化成机器人的控制器<br>
 ### 4. 关闭
 ```
