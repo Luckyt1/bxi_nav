@@ -20,10 +20,10 @@ bash build.sh humble
 bash start.sh
 ```
 等待第二个rviz启动则启动成功<br>
-![alt text](image.png)
-![alt text](image-1.png)
+![alt text](img/image.png)
+![alt text](img/image-1.png)
 随后多的一个终端里面启动雷达驱动节点即可 确保发布这两个节点/**livox/imu** **/livox/lidar**<br>
-![alt text](image-2.png)
+![alt text](img/image-2.png)
 可以往 **/way_point** 话题里发期望机器人移动的位置<br>
 **/cmd_vel**是导航发布的移动指令，需要自行转化成机器人的控制器<br>
 ### 4. 关闭
