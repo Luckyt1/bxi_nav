@@ -85,4 +85,11 @@ bxi_nav/src/livox_ros_driver2/config/MID360s_config.json
 #修改后重新编译即可
 ```
 **如果不好查看雷达ip，可以先配置好静态ip然后运行该程序，在终端可以看到具体ip**
+### 3.可视化相关问题
+如果是远程桌面，而且控制机器人需要进入root权限，这个时候出现无法显示界面问题
+```
+xhost local:root #在用户界面输入这个
+sudo su #再进入root桌面
+bash start.sh #启动程序即可 可视化界面就出来了
+```
 
