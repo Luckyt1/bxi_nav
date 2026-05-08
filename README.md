@@ -1,5 +1,11 @@
 # 一个基于BXI硬件的自主探索导航示例
-## 使用方法
+## 前置安装
+```
+# ros2 humble
+sudo apt install ros-humble-pcl-ros
+sudo apt install libgoogle-glog-dev
+```
+## 快速使用
 ### 1. 编译livox_sdk
 ```
 cd src/Livox-SDK2/
