@@ -26,7 +26,7 @@ tmux select-pane -t 2 -T "雷达驱动"
 
 tmux send-keys -t $SESSION:0.0 "source install/setup.bash;ros2 launch point_lio point_lio.launch.py" C-m
 tmux send-keys -t $SESSION:0.1 "source install/setup.bash;ros2 launch vehicle_simulator system_real_robot.launch.py" C-m
-tmux send-keys -t $SESSION:0.2 "source install/setup.bash;ros2 launch livox_ros_driver2 msg_MID360s_launch" C-m
+tmux send-keys -t $SESSION:0.2 "source install/setup.bash;ros2 launch livox_ros_driver2 msg_MID360s_launch.py" C-m
 
 tmux select-pane -t 0
 tmux attach-session -t $SESSION
