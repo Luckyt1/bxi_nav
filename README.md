@@ -35,6 +35,11 @@ bash stop.sh
 本项目的雷达硬件是倒置的,如果后续雷达是正向放置，需要自行更改坐标系<br>
 ### 2.雷达无法启动
 应该是没有配置好雷达驱动<br>
+#### 配置静态ip
+![alt text](/img/image-4.png)
+点击设置的齿轮，如图配置即可，建议直连配置，远程桌面配置可能有权限的问题<br>
+![alt text](/img/image-5.png)
+
 #### 配置修改
 bxi_nav/src/livox_ros_driver2/config/MID360s_config.json
 ```
@@ -80,7 +85,4 @@ bxi_nav/src/livox_ros_driver2/config/MID360s_config.json
 #修改后重新编译即可
 ```
 **如果不好查看雷达ip，可以先配置好静态ip然后运行该程序，在终端可以看到具体ip**
-#### 如何配置静态ip
-![alt text](/img/image-4.png)
-点击设置的齿轮，如图配置即可，建议直连配置，远程桌面配置可能有权限的问题<br>
-![alt text](/img/image-5.png)
+
