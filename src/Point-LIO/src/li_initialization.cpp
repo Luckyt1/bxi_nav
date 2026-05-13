@@ -28,7 +28,7 @@ void standard_pcl_cbk(const sensor_msgs::msg::PointCloud2::SharedPtr & msg)
 {
   // mtx_buffer.lock();
   scan_count++;
-  double preprocess_start_time = omp_get_wtime();
+  double preprocess_start_time = point_lio::wall_time();
   if (rclcpp::Time(msg->header.stamp).seconds() < last_timestamp_lidar) {
     RCLCPP_ERROR(rclcpp::get_logger("li_initialization"), "lidar loop back, clear buffer");
     return;
@@ -82,7 +82,7 @@ void standard_pcl_cbk(const sensor_msgs::msg::PointCloud2::SharedPtr & msg)
       }
     }
   }
-  s_plot11[scan_count] = omp_get_wtime() - preprocess_start_time;
+  s_plot11[scan_count] = point_lio::wall_time() - preprocess_start_time;
   // mtx_buffer.unlock();
   // sig_buffer.notify_all();
 }
@@ -90,7 +90,7 @@ void standard_pcl_cbk(const sensor_msgs::msg::PointCloud2::SharedPtr & msg)
 void livox_pcl_cbk(const livox_ros_driver2::msg::CustomMsg::SharedPtr & msg)
 {
   // mtx_buffer.lock();
-  double preprocess_start_time = omp_get_wtime();
+  double preprocess_start_time = point_lio::wall_time();
   scan_count++;
   if (rclcpp::Time(msg->header.stamp).seconds() < last_timestamp_lidar) {
     RCLCPP_ERROR(rclcpp::get_logger("li_initialization"), "lidar loop back, clear buffer");
@@ -145,7 +145,7 @@ void livox_pcl_cbk(const livox_ros_driver2::msg::CustomMsg::SharedPtr & msg)
       }
     }
   }
-  s_plot11[scan_count] = omp_get_wtime() - preprocess_start_time;
+  s_plot11[scan_count] = point_lio::wall_time() - preprocess_start_time;
   // mtx_buffer.unlock();
   // sig_buffer.notify_all();
 }

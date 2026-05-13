@@ -1,5 +1,7 @@
 #include "preprocess.h"
 
+#include <timing_utils.h>
+
 #define RETURN0 0x00
 #define RETURN0AND1 0x10
 
@@ -322,7 +324,7 @@ void Preprocess::avia_handler(const livox_ros_driver2::msg::CustomMsg::SharedPtr
   pl_surf.clear();
   pl_corn.clear();
   pl_full.clear();
-  double t1 = omp_get_wtime();
+  double t1 = point_lio::wall_time();
   int plsize = msg->point_num;
 
   pl_corn.reserve(plsize);

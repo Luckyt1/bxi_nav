@@ -10,6 +10,7 @@
 
 #include <nav_msgs/msg/odometry.hpp>
 #include <nav_msgs/msg/path.hpp>
+#include <timing_utils.h>
 
 #include "li_initialization.h"
 
@@ -442,10 +443,10 @@ int main(int argc, char ** argv)
       solve_time = 0;
       propag_time = 0;
       update_time = 0;
-      t0 = omp_get_wtime();
+      t0 = point_lio::wall_time();
 
       /*** downsample the feature points in a scan ***/
-      t1 = omp_get_wtime();
+      t1 = point_lio::wall_time();
       p_imu->Process(Measures, feats_undistort);
       if (space_down_sample) {
         downSizeFilterSurf.setInputCloud(feats_undistort);
@@ -511,7 +512,7 @@ int main(int argc, char ** argv)
 
       Nearest_Points.resize(feats_down_size);
 
-      t2 = omp_get_wtime();
+      t2 = point_lio::wall_time();
 
       /*** iterated state estimation ***/
       crossmat_list.reserve(feats_down_size);
@@ -605,14 +606,14 @@ int main(int argc, char ** argv)
 
                   if (dt_cov > 0.0) {
                     time_update_last = get_time_sec(imu_next.header.stamp);
-                    double propag_imu_start = omp_get_wtime();
+                    double propag_imu_start = point_lio::wall_time();
 
                     kf_output.predict(dt_cov, Q_output, input_in, false, true);
 
-                    propag_time += omp_get_wtime() - propag_imu_start;
-                    double solve_imu_start = omp_get_wtime();
+                    propag_time += point_lio::wall_time() - propag_imu_start;
+                    double solve_imu_start = point_lio::wall_time();
                     kf_output.update_iterated_dyn_share_IMU();
-                    solve_time += omp_get_wtime() - solve_imu_start;
+                    solve_time += point_lio::wall_time() - solve_imu_start;
                   }
                 }
                 imu_deque.pop_front();
@@ -627,7 +628,7 @@ int main(int argc, char ** argv)
             }
 
             double dt = time_current - time_predict_last_const;
-            double propag_state_start = omp_get_wtime();
+            double propag_state_start = point_lio::wall_time();
             if (!prop_at_freq_of_imu) {
               double dt_cov = time_current - time_update_last;
               if (dt_cov > 0.0) {
@@ -636,9 +637,9 @@ int main(int argc, char ** argv)
               }
             }
             kf_output.predict(dt, Q_output, input_in, true, false);
-            propag_time += omp_get_wtime() - propag_state_start;
+            propag_time += point_lio::wall_time() - propag_state_start;
             time_predict_last_const = time_current;
-            double t_update_start = omp_get_wtime();
+            double t_update_start = point_lio::wall_time();
 
             if (feats_down_size < 1) {
               RCLCPP_WARN(LOGGER, "No point, skip this scan!\n");
@@ -649,7 +650,7 @@ int main(int argc, char ** argv)
               idx = idx + time_seq[k];
               continue;
             }
-            solve_start = omp_get_wtime();
+            solve_start = point_lio::wall_time();
 
             if (publish_odometry_without_downsample) {
               /******* Publish odometry *******/
@@ -673,9 +674,9 @@ int main(int argc, char ** argv)
               pointBodyToWorld(&point_body_j, &point_world_j);
             }
 
-            solve_time += omp_get_wtime() - solve_start;
+            solve_time += point_lio::wall_time() - solve_start;
 
-            update_time += omp_get_wtime() - t_update_start;
+            update_time += point_lio::wall_time() - t_update_start;
             idx += time_seq[k];
             // std::cout << "pbp output effect feat num:" << effct_feat_num << '\n';
           }
@@ -807,7 +808,7 @@ int main(int argc, char ** argv)
             }
             double dt = time_current - t_last;
             t_last = time_current;
-            double propag_start = omp_get_wtime();
+            double propag_start = point_lio::wall_time();
 
             if (!prop_at_freq_of_imu) {
               double dt_cov = time_current - time_update_last;
@@ -818,9 +819,9 @@ int main(int argc, char ** argv)
             }
             kf_input.predict(dt, Q_input, input_in, true, false);
 
-            propag_time += omp_get_wtime() - propag_start;
+            propag_time += point_lio::wall_time() - propag_start;
 
-            double t_update_start = omp_get_wtime();
+            double t_update_start = point_lio::wall_time();
 
             if (feats_down_size < 1) {
               RCLCPP_WARN(LOGGER, "No point, skip this scan!\n");
@@ -833,7 +834,7 @@ int main(int argc, char ** argv)
               continue;
             }
 
-            solve_start = omp_get_wtime();
+            solve_start = point_lio::wall_time();
 
             if (publish_odometry_without_downsample) {
               /******* Publish odometry *******/
@@ -854,9 +855,9 @@ int main(int argc, char ** argv)
               PointType & point_world_j = feats_down_world->points[idx + j + 1];
               pointBodyToWorld(&point_body_j, &point_world_j);
             }
-            solve_time += omp_get_wtime() - solve_start;
+            solve_time += point_lio::wall_time() - solve_start;
 
-            update_time += omp_get_wtime() - t_update_start;
+            update_time += point_lio::wall_time() - t_update_start;
             idx = idx + time_seq[k];
           }
         } else {
@@ -938,13 +939,13 @@ int main(int argc, char ** argv)
       }
 
       /*** add the feature points to map ***/
-      t3 = omp_get_wtime();
+      t3 = point_lio::wall_time();
 
       if (feats_down_size > 4) {
         MapIncremental();
       }
 
-      t5 = omp_get_wtime();
+      t5 = point_lio::wall_time();
       /******* Publish points *******/
       if (path_en) publish_path(pub_path);
       if (scan_pub_en || pcd_save_en) publish_frame_world(pub_laser_cloud_full_res);

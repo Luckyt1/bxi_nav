@@ -4,8 +4,8 @@
 #include <Python.h>
 #include <ivox/ivox3d.h>
 #include <math.h>
-#include <omp.h>
 #include <pcl/common/transforms.h>
+#include <timing_utils.h>
 #include <unistd.h>
 
 #include <Eigen/Core>

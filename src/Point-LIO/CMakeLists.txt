@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
 project(point_lio)
-
 # 设置策略以消除警告
 cmake_policy(VERSION 3.16)
 
@@ -46,12 +45,6 @@ find_package(Eigen3 REQUIRED)
 # PCL
 find_package(PCL REQUIRED COMPONENTS common io filters)
 
-# OpenMP（可选）
-find_package(OpenMP QUIET)
-if(OpenMP_CXX_FOUND)
-  message(STATUS "OpenMP found: ${OpenMP_CXX_VERSION}")
-endif()
-
 # 查找 Python 3 - 需要 Python.h
 find_package(Python3 COMPONENTS Development REQUIRED)
 
@@ -91,12 +84,6 @@ set(ALL_LIBS
   ${PCL_LIBRARIES}
   Python3::Python
 )
-
-# 添加 OpenMP（如果需要）
-if(OpenMP_CXX_FOUND)
-  target_compile_options(pointlio_mapping PRIVATE ${OpenMP_CXX_FLAGS})
-  list(APPEND ALL_LIBS ${OpenMP_CXX_LIBRARIES})
-endif()
 
 # 一次性链接所有库（使用普通签名）
 target_link_libraries(pointlio_mapping ${ALL_LIBS})
